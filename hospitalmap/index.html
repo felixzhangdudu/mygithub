@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- 引入 ECharts 文件 -->
+    <script src="echartsAll.js"></script>
+    <script src="china.js"></script>
+</head>
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main3" style="width: 1920px;height:1080px;"></div>
+    <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart3 = echarts.init(document.getElementById('main3'));
+
+    var data = {
+			'北京':['北京协和医院',
+					'北京大学国际医院',
+					'北京积水潭医院',
+					'中国人民解放军第一附属医院',
+					'中国人民解放军海军总医院',
+					'中国医学科学院望京医院',
+					'火箭军总医院'],
+					
+			'天津':['中国人民武装警察部队后勤学院附属医院',
+    				'天津医科大学总医院',
+    				'天津医科大学第二医院'],
+    		
+    		'河北':['邯郸市第一医院',
+	    			'张家口市第一医院',
+	    			'河北医科大学第二医院'],
+	    			
+	    	'山西':['山西省人民医院',
+	    			'山西医科大学第一医院'],
+	    	
+	    	'内蒙古':['内蒙古医科大学附属医院',
+		    		'内蒙古自治区人民医院',
+		    		'内蒙古林业总医院'],
+	    	
+	    	'辽宁':['中国医科大学附属盛京医院',
+		    		'大连医科大学附属第一医院',
+		    		'大连医科大学附属第二医院',
+		    		'锦州医科大学附属第一医院'],
+	    	
+	    	'吉林':['吉林大学白求恩第一医院'],
+	    	
+	    	'黑龙江':['哈尔滨医科大学附属第二医院',
+	    			'哈尔滨医科大学附属第一医院'],
+	    	
+	    	'上海':['第二军医大学附属长海医院',
+	    			'第二军医大学附属长征医院'],
+	    	
+	    	'江苏':['徐州医科大学附属医院',
+		    		'苏州大学附属第二医院',
+		    		'南京市儿童医院',
+		    		'南京鼓楼医院'],
+	    	
+	    	'浙江':['浙江省丽水市中心医院',
+		    		'浙江大学医学院附属第一医院',
+		    		'温州医科大学附属第一医院',
+		    		'湖州市中心医院',
+		    		'台州市第一人民医院'],
+	    	
+	    	'安徽':['安徽省立医院',
+		    		'安徽医科大学第一附属医院',
+		    		'安徽医科大学第二附属医院'],
+	    	
+	    	'福建':['福建医科大学附属第一医院',
+		    		'福建省立医院',
+		    		'泉州市第一医院',
+		    		'厦门大学附属第一医院'],
+	    	
+	    	'江西':['赣州市人民医院',
+		    		'南昌大学第一附属医院',
+		    		'南昌大学第二附属医院',
+		    		'江西省人民医院'],
+	    	
+	    	'山东':['青岛大学附属医院',
+		    		'山东省立医院',
+		    		'山东大学齐鲁医院',
+		    		'淄博市中心医院'],
+	    	
+	    	'河南':['安阳市人民医院',
+		    		'郑州大学第一附属医院',
+		    		'河南省人民医院',],
+	    	
+	    	'湖北':['武汉大学人民医院',
+		    		'华中科技大学同济医学院附属协和医院',
+		    		'中国人民解放军广州军区武汉总医院',],
+	    	
+	    	'湖南':['中南大学湘雅二医院',
+	    			'中南大学湘雅医院'],
+	    	
+	    	'广东':['广东三九脑科医院',
+	    			'深圳市第二人民医院'],
+	    	
+	    	'广西':['广西医科大学第一附属医院'],
+	    	
+	    	'海南':['海南省人民医院'],
+	    	
+	    	'重庆':['第三军医大学第一附属医院（西南医院）'],
+	    	
+	    	'四川':['西南医科大学附属医院'],
+	    	
+	    	'贵州':['贵阳市第二人民医院',
+		    		'贵州医科大学附属医院',
+		    		'贵阳脑科医院'],
+	    	
+	    	'云南':['昆明医科大学第一附属医院',
+	    			'昆明医科大学第二附属医院'],
+	    	
+	    	'西藏':['西藏自治区第二人民医院'],
+	    	
+	    	'陕西':['西安交通大学第一附属医院',
+	    			'空军军医大学第一附属医院（西京医院）'],
+	    	
+	    	'甘肃':['兰州大学第一医院'],
+	    	
+	    	'青海':['青海省人民医院'],
+	    	
+	    	'宁夏':['宁夏医科大学总医院',
+	    			'宁夏回族自治区人民医院'],
+	    	
+	    	'新疆':['新疆医科大学第一附属医院',
+	    			'新疆维吾尔自治区人民医院'],
+	    			
+
+    				
+	};   
+    
+    function convertData() { 		
+   	 	var res = [];
+   	 	for (i in data){
+	   	 	 res.push({
+	             name: i,
+	             value: 8
+	         });
+   		 }
+        return res;
+    }
+    
+    function showtooltip(name) {    		
+   		var html = '';
+   		if(data[name]){
+   			for (var j = 0; j < data[name].length; j++) {
+   				html += '· '+data[name][j]+'<br/>';
+   			}
+   		}   		
+   		return html;
+    }
+
+    option3 = {
+    		backgroundColor: '#404A59',
+        title: {
+            text: '省份医院',
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left'
+        },
+        tooltip: {
+            trigger: 'item',
+            backgroundColor:'#0B1830',
+            borderColor:'#45C3FF',
+            borderWidth:'0.5px',
+            textStyle:{
+            		'fontSize':16
+            },
+            formatter:function(params, ticket, callback) {
+                return showtooltip(params.name);
+          } 
+        },
+        series: [
+            {
+                name: '',
+                type: 'map',
+                mapType: 'china',
+                roam: false,
+                label: {
+                    normal: {
+                        show: true
+                    },
+                    emphasis: {
+                        show: true
+                    },                   
+                },
+                itemStyle: {
+                    normal: {
+                        areaColor: '#323C48',
+                        borderColor: '#1E2227',
+                        color: '#2257BE',
+                        label: {
+                        		textStyle: {
+                                color: '#fff',
+                                'fontSize':14,
+                                align:'left'
+                            },      
+                            position:'insideLeft'
+                        },
+                    },
+                    emphasis: {
+                        areaColor: '#222931',
+                        label: {
+                        		textStyle: {
+                                color: '#fff',
+                                'fontSize':14
+                            },                  
+                    		},
+                    }
+                },
+                data:convertData()
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart3.setOption(option3);
+    </script>
+</body>
+</html>
